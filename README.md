@@ -17,6 +17,8 @@ For each library, each of the following tasks was benchmarked both on a large an
 ## Benchmarking process
 The benchmarks were taken under macOS 11.6 and rustc 1.57.0-nightly (8f8092cc3 2021-09-28) on a system with 16 GB of 2133 MHz RAM and a 2.4 GHz Intel i5-8279U CPU (with 4 physical and 8 logical cores).
 The benchmarks were run sequentially with output redirected to a text file (`cargo bench > bench.txt`, with minimal background processes.
+
+If you run these benchmarks in a different environment and get significantly different results, feel free to open an issue and, if the results are reproducible, I will make note of them here.
 ## Results
 There are two main types of JSON parsing library:
 - _property-parsing libraries_ (Serde JSON, json-rust, simd-json, and tinyjson), which focus on retrieving the value of a particular JSON property, and have little to no ability to parse an entire JSON file at once
