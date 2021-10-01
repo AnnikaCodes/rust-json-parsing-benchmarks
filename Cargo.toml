@@ -6,4 +6,11 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+ajson = "0.2.4"
+gjson = "0.8.0"
+json = "0.12.4"
 lazy_static = "1.4.0"
+pikkr-annika = "0.16.1"
+serde_json = "1.0.68"
+simd-json = "0.4.7"
+tinyjson = "2.3.0"

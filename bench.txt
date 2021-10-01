@@ -1,0 +1,53 @@
+
+running 48 tests
+test tests::ajson_large_fourth_level           ... bench:      38,314 ns/iter (+/- 5,448)
+test tests::ajson_large_parse_all              ... ignored
+test tests::ajson_large_top_level              ... bench:      17,223 ns/iter (+/- 1,971)
+test tests::ajson_small_fourth_level           ... bench:         793 ns/iter (+/- 153)
+test tests::ajson_small_parse_all              ... ignored
+test tests::ajson_small_top_level              ... bench:         195 ns/iter (+/- 49)
+test tests::gjson_large_fourth_level           ... bench:      14,275 ns/iter (+/- 4,566)
+test tests::gjson_large_parse_all              ... ignored
+test tests::gjson_large_top_level              ... bench:       3,249 ns/iter (+/- 577)
+test tests::gjson_small_fourth_level           ... bench:         251 ns/iter (+/- 58)
+test tests::gjson_small_parse_all              ... ignored
+test tests::gjson_small_top_level              ... bench:          95 ns/iter (+/- 17)
+test tests::json_rust_large_fourth_level       ... bench:     117,588 ns/iter (+/- 24,849)
+test tests::json_rust_large_parse_all          ... bench:     120,520 ns/iter (+/- 9,665)
+test tests::json_rust_large_top_level          ... bench:     119,112 ns/iter (+/- 6,275)
+test tests::json_rust_small_fourth_level       ... bench:       1,032 ns/iter (+/- 215)
+test tests::json_rust_small_parse_all          ... bench:       1,004 ns/iter (+/- 108)
+test tests::json_rust_small_top_level          ... bench:       1,012 ns/iter (+/- 73)
+test tests::pikkr_stateful_large_fourth_level  ... bench:      22,082 ns/iter (+/- 5,922)
+test tests::pikkr_stateful_large_parse_all     ... ignored
+test tests::pikkr_stateful_large_top_level     ... bench:      20,699 ns/iter (+/- 1,215)
+test tests::pikkr_stateful_small_fourth_level  ... bench:         745 ns/iter (+/- 52)
+test tests::pikkr_stateful_small_parse_all     ... ignored
+test tests::pikkr_stateful_small_top_level     ... bench:         549 ns/iter (+/- 47)
+test tests::pikkr_stateless_large_fourth_level ... bench:      26,870 ns/iter (+/- 3,086)
+test tests::pikkr_stateless_large_parse_all    ... ignored
+test tests::pikkr_stateless_large_top_level    ... bench:      39,757 ns/iter (+/- 5,674)
+test tests::pikkr_stateless_small_fourth_level ... bench:       4,436 ns/iter (+/- 467)
+test tests::pikkr_stateless_small_parse_all    ... ignored
+test tests::pikkr_stateless_small_top_level    ... bench:       2,571 ns/iter (+/- 423)
+test tests::serde_large_fourth_level           ... bench:     321,891 ns/iter (+/- 30,266)
+test tests::serde_large_parse_all              ... bench:     322,527 ns/iter (+/- 35,052)
+test tests::serde_large_top_level              ... bench:     326,003 ns/iter (+/- 39,421)
+test tests::serde_small_fourth_level           ... bench:       1,334 ns/iter (+/- 78)
+test tests::serde_small_parse_all              ... bench:       1,256 ns/iter (+/- 136)
+test tests::serde_small_top_level              ... bench:       1,315 ns/iter (+/- 71)
+test tests::simd_large_fourth_level            ... bench:     319,508 ns/iter (+/- 50,356)
+test tests::simd_large_parse_all               ... bench:     325,635 ns/iter (+/- 19,826)
+test tests::simd_large_top_level               ... bench:     213,450 ns/iter (+/- 20,278)
+test tests::simd_small_fourth_level            ... bench:       2,212 ns/iter (+/- 359)
+test tests::simd_small_parse_all               ... bench:       2,162 ns/iter (+/- 228)
+test tests::simd_small_top_level               ... bench:       2,401 ns/iter (+/- 314)
+test tests::tinyjson_large_fourth_level        ... bench:     393,516 ns/iter (+/- 21,310)
+test tests::tinyjson_large_parse_all           ... bench:     390,695 ns/iter (+/- 40,576)
+test tests::tinyjson_large_top_level           ... bench:     419,910 ns/iter (+/- 206,291)
+test tests::tinyjson_small_fourth_level        ... bench:       2,335 ns/iter (+/- 613)
+test tests::tinyjson_small_parse_all           ... bench:       2,204 ns/iter (+/- 592)
+test tests::tinyjson_small_top_level           ... bench:       2,090 ns/iter (+/- 758)
+
+test result: ok. 0 passed; 0 failed; 8 ignored; 40 measured; 0 filtered out; finished in 95.08s
+
