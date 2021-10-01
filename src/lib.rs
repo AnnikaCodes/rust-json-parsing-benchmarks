@@ -8,10 +8,12 @@ mod tests {
     use test::Bencher;
 
     lazy_static! {
-        static ref SMALL_JSON: String = fs::read_to_string(Path::new("json/small.json"))
-            .expect("Error loading 'json/small.json'; make sure you are operating from the root directory");
-        static ref LARGE_JSON: String = fs::read_to_string(Path::new("json/large.json"))
-            .expect("Error loading 'json/large.json'; make sure you are operating from the root directory");
+        static ref SMALL_JSON: String = fs::read_to_string(Path::new("json/small.json")).expect(
+            "Error loading 'json/small.json'; make sure you are operating from the root directory"
+        );
+        static ref LARGE_JSON: String = fs::read_to_string(Path::new("json/large.json")).expect(
+            "Error loading 'json/large.json'; make sure you are operating from the root directory"
+        );
     }
 
     // Serde JSON
@@ -33,14 +35,20 @@ mod tests {
     fn serde_small_fourth_level(b: &mut Bencher) {
         b.iter(|| {
             let parsed: serde_json::Value = serde_json::from_str(&SMALL_JSON).unwrap();
-            assert_eq!(parsed["property"]["subProperty"]["thirdLevel"]["pi"], 3.14159);
+            assert_eq!(
+                parsed["property"]["subProperty"]["thirdLevel"]["pi"],
+                3.14159
+            );
         });
     }
     #[bench]
     fn serde_large_fourth_level(b: &mut Bencher) {
         b.iter(|| {
             let parsed: serde_json::Value = serde_json::from_str(&LARGE_JSON).unwrap();
-            assert_eq!(parsed["property"]["subProperty"]["thirdLevel"]["pi"], 3.14159);
+            assert_eq!(
+                parsed["property"]["subProperty"]["thirdLevel"]["pi"],
+                3.14159
+            );
         });
     }
     #[bench]
@@ -60,30 +68,40 @@ mod tests {
     #[bench]
     fn simd_small_top_level(b: &mut Bencher) {
         b.iter(|| {
-            let parsed: simd_json::OwnedValue = simd_json::serde::from_str(&mut SMALL_JSON.clone()).unwrap();
+            let parsed: simd_json::OwnedValue =
+                simd_json::serde::from_str(&mut SMALL_JSON.clone()).unwrap();
             assert_eq!(parsed["topLevelProperty"], 1);
         });
     }
     #[bench]
     fn simd_large_top_level(b: &mut Bencher) {
         b.iter(|| {
-            let parsed: simd_json::OwnedValue = simd_json::serde::from_str(&mut LARGE_JSON.clone()).unwrap();
+            let parsed: simd_json::OwnedValue =
+                simd_json::serde::from_str(&mut LARGE_JSON.clone()).unwrap();
             assert_eq!(parsed["topLevelProperty"], 1);
         });
     }
     #[bench]
     fn simd_small_fourth_level(b: &mut Bencher) {
         b.iter(|| {
-            let parsed: serde_json::Value = simd_json::serde::from_str(&mut SMALL_JSON.clone()).unwrap();
+            let parsed: serde_json::Value =
+                simd_json::serde::from_str(&mut SMALL_JSON.clone()).unwrap();
             // simd-json introduces floating-point precision problems, for some reason
-            assert_eq!(parsed["property"]["subProperty"]["thirdLevel"]["pi"], 3.1415900000000003);
+            assert_eq!(
+                parsed["property"]["subProperty"]["thirdLevel"]["pi"],
+                3.1415900000000003
+            );
         });
     }
     #[bench]
     fn simd_large_fourth_level(b: &mut Bencher) {
         b.iter(|| {
-            let parsed: serde_json::Value = simd_json::serde::from_str(&mut LARGE_JSON.clone()).unwrap();
-            assert_eq!(parsed["property"]["subProperty"]["thirdLevel"]["pi"], 3.1415900000000003);
+            let parsed: serde_json::Value =
+                simd_json::serde::from_str(&mut LARGE_JSON.clone()).unwrap();
+            assert_eq!(
+                parsed["property"]["subProperty"]["thirdLevel"]["pi"],
+                3.1415900000000003
+            );
         });
     }
     #[bench]
@@ -117,14 +135,16 @@ mod tests {
     #[bench]
     fn gjson_small_fourth_level(b: &mut Bencher) {
         b.iter(|| {
-            let parsed: gjson::Value = gjson::get(&SMALL_JSON, "property.subProperty.thirdLevel.pi");
+            let parsed: gjson::Value =
+                gjson::get(&SMALL_JSON, "property.subProperty.thirdLevel.pi");
             assert_eq!(parsed.f32(), 3.14159);
         });
     }
     #[bench]
     fn gjson_large_fourth_level(b: &mut Bencher) {
         b.iter(|| {
-            let parsed: gjson::Value = gjson::get(&LARGE_JSON, "property.subProperty.thirdLevel.pi");
+            let parsed: gjson::Value =
+                gjson::get(&LARGE_JSON, "property.subProperty.thirdLevel.pi");
             assert_eq!(parsed.f32(), 3.14159);
         });
     }
@@ -161,14 +181,16 @@ mod tests {
     #[bench]
     fn ajson_small_fourth_level(b: &mut Bencher) {
         b.iter(|| {
-            let parsed: ajson::Value = ajson::get(&SMALL_JSON, "property.subProperty.thirdLevel.pi").unwrap();
+            let parsed: ajson::Value =
+                ajson::get(&SMALL_JSON, "property.subProperty.thirdLevel.pi").unwrap();
             assert_eq!(parsed.to_f64(), 3.14159);
         });
     }
     #[bench]
     fn ajson_large_fourth_level(b: &mut Bencher) {
         b.iter(|| {
-            let parsed: ajson::Value = ajson::get(&LARGE_JSON, "property.subProperty.thirdLevel.pi").unwrap();
+            let parsed: ajson::Value =
+                ajson::get(&LARGE_JSON, "property.subProperty.thirdLevel.pi").unwrap();
             assert_eq!(parsed.to_f64(), 3.14159);
         });
     }
@@ -206,14 +228,20 @@ mod tests {
     fn json_rust_small_fourth_level(b: &mut Bencher) {
         b.iter(|| {
             let parsed = json::parse(&SMALL_JSON).unwrap();
-            assert_eq!(parsed["property"]["subProperty"]["thirdLevel"]["pi"], 3.14159);
+            assert_eq!(
+                parsed["property"]["subProperty"]["thirdLevel"]["pi"],
+                3.14159
+            );
         });
     }
     #[bench]
     fn json_rust_large_fourth_level(b: &mut Bencher) {
         b.iter(|| {
             let parsed = json::parse(&LARGE_JSON).unwrap();
-            assert_eq!(parsed["property"]["subProperty"]["thirdLevel"]["pi"], 3.14159);
+            assert_eq!(
+                parsed["property"]["subProperty"]["thirdLevel"]["pi"],
+                3.14159
+            );
         });
     }
     #[bench]
@@ -232,34 +260,44 @@ mod tests {
     // Pikkr
     #[bench]
     fn pikkr_stateful_small_top_level(b: &mut Bencher) {
-        let mut parser = pikkr_annika::Pikkr::new(&vec![
-            "$.topLevelProperty".as_bytes(),
-        ], 2).unwrap();
+        let mut parser =
+            pikkr_annika::Pikkr::new(&vec!["$.topLevelProperty".as_bytes()], 2).unwrap();
         b.iter(|| {
             // Pikkr has a rather low-level API
             // Maybe someday I'll write a wrapper for it...
-            let parsed: u32 = String::from_utf8(parser.parse(SMALL_JSON.as_bytes())
-                .unwrap()
-                .get(0)
-                .unwrap()
-                .unwrap()
-            .to_vec()).unwrap().parse().unwrap();
+            let parsed: u32 = String::from_utf8(
+                parser
+                    .parse(SMALL_JSON.as_bytes())
+                    .unwrap()
+                    .get(0)
+                    .unwrap()
+                    .unwrap()
+                    .to_vec(),
+            )
+            .unwrap()
+            .parse()
+            .unwrap();
             assert_eq!(parsed, 1);
         });
     }
 
     #[bench]
     fn pikkr_stateful_large_top_level(b: &mut Bencher) {
-        let mut parser = pikkr_annika::Pikkr::new(&vec![
-            "$.topLevelProperty".as_bytes(),
-        ], 2).unwrap();
+        let mut parser =
+            pikkr_annika::Pikkr::new(&vec!["$.topLevelProperty".as_bytes()], 2).unwrap();
         b.iter(|| {
-            let parsed: u32 = String::from_utf8(parser.parse(LARGE_JSON.as_bytes())
-                .unwrap()
-                .get(0)
-                .unwrap()
-                .unwrap()
-            .to_vec()).unwrap().parse().unwrap();
+            let parsed: u32 = String::from_utf8(
+                parser
+                    .parse(LARGE_JSON.as_bytes())
+                    .unwrap()
+                    .get(0)
+                    .unwrap()
+                    .unwrap()
+                    .to_vec(),
+            )
+            .unwrap()
+            .parse()
+            .unwrap();
             assert_eq!(parsed, 1);
         });
     }
@@ -267,15 +305,20 @@ mod tests {
     #[bench]
     fn pikkr_stateless_small_top_level(b: &mut Bencher) {
         b.iter(|| {
-            let mut parser = pikkr_annika::Pikkr::new(&vec![
-                "$.topLevelProperty".as_bytes(),
-            ], 2).unwrap();
-            let parsed: u32 = String::from_utf8(parser.parse(SMALL_JSON.as_bytes())
-                .unwrap()
-                .get(0)
-                .unwrap()
-                .unwrap()
-            .to_vec()).unwrap().parse().unwrap();
+            let mut parser =
+                pikkr_annika::Pikkr::new(&vec!["$.topLevelProperty".as_bytes()], 2).unwrap();
+            let parsed: u32 = String::from_utf8(
+                parser
+                    .parse(SMALL_JSON.as_bytes())
+                    .unwrap()
+                    .get(0)
+                    .unwrap()
+                    .unwrap()
+                    .to_vec(),
+            )
+            .unwrap()
+            .parse()
+            .unwrap();
             assert_eq!(parsed, 1);
         });
     }
@@ -283,48 +326,65 @@ mod tests {
     #[bench]
     fn pikkr_stateless_large_top_level(b: &mut Bencher) {
         b.iter(|| {
-            let mut parser = pikkr_annika::Pikkr::new(&vec![
-                "$.topLevelProperty".as_bytes(),
-            ], 2).unwrap();
-            let parsed: u32 = String::from_utf8(parser.parse(LARGE_JSON.as_bytes())
-                .unwrap()
-                .get(0)
-                .unwrap()
-                .unwrap()
-            .to_vec()).unwrap().parse().unwrap();
+            let mut parser =
+                pikkr_annika::Pikkr::new(&vec!["$.topLevelProperty".as_bytes()], 2).unwrap();
+            let parsed: u32 = String::from_utf8(
+                parser
+                    .parse(LARGE_JSON.as_bytes())
+                    .unwrap()
+                    .get(0)
+                    .unwrap()
+                    .unwrap()
+                    .to_vec(),
+            )
+            .unwrap()
+            .parse()
+            .unwrap();
             assert_eq!(parsed, 1);
         });
     }
     #[bench]
     fn pikkr_stateful_small_fourth_level(b: &mut Bencher) {
-        let mut parser = pikkr_annika::Pikkr::new(&vec![
-            "$.property.subProperty.thirdLevel.pi".as_bytes(),
-        ], 2).unwrap();
+        let mut parser =
+            pikkr_annika::Pikkr::new(&vec!["$.property.subProperty.thirdLevel.pi".as_bytes()], 2)
+                .unwrap();
         b.iter(|| {
             // Pikkr has a rather low-level API
             // Maybe someday I'll write a wrapper for it...
-            let parsed: f32 = String::from_utf8(parser.parse(SMALL_JSON.as_bytes())
-                .unwrap()
-                .get(0)
-                .unwrap()
-                .unwrap()
-            .to_vec()).unwrap().parse().unwrap();
+            let parsed: f32 = String::from_utf8(
+                parser
+                    .parse(SMALL_JSON.as_bytes())
+                    .unwrap()
+                    .get(0)
+                    .unwrap()
+                    .unwrap()
+                    .to_vec(),
+            )
+            .unwrap()
+            .parse()
+            .unwrap();
             assert_eq!(parsed, 3.14159);
         });
     }
 
     #[bench]
     fn pikkr_stateful_large_fourth_level(b: &mut Bencher) {
-        let mut parser = pikkr_annika::Pikkr::new(&vec![
-            "$.property.subProperty.thirdLevel.pi".as_bytes(),
-        ], 2).unwrap();
+        let mut parser =
+            pikkr_annika::Pikkr::new(&vec!["$.property.subProperty.thirdLevel.pi".as_bytes()], 2)
+                .unwrap();
         b.iter(|| {
-            let parsed: f32 = String::from_utf8(parser.parse(LARGE_JSON.as_bytes())
-                .unwrap()
-                .get(0)
-                .unwrap()
-                .unwrap()
-            .to_vec()).unwrap().parse().unwrap();
+            let parsed: f32 = String::from_utf8(
+                parser
+                    .parse(LARGE_JSON.as_bytes())
+                    .unwrap()
+                    .get(0)
+                    .unwrap()
+                    .unwrap()
+                    .to_vec(),
+            )
+            .unwrap()
+            .parse()
+            .unwrap();
             assert_eq!(parsed, 3.14159);
         });
     }
@@ -332,15 +392,23 @@ mod tests {
     #[bench]
     fn pikkr_stateless_small_fourth_level(b: &mut Bencher) {
         b.iter(|| {
-            let mut parser = pikkr_annika::Pikkr::new(&vec![
-                "$.property.subProperty.thirdLevel.pi".as_bytes(),
-            ], 2).unwrap();
-            let parsed: f32 = String::from_utf8(parser.parse(SMALL_JSON.as_bytes())
-                .unwrap()
-                .get(0)
-                .unwrap()
-                .unwrap()
-            .to_vec()).unwrap().parse().unwrap();
+            let mut parser = pikkr_annika::Pikkr::new(
+                &vec!["$.property.subProperty.thirdLevel.pi".as_bytes()],
+                2,
+            )
+            .unwrap();
+            let parsed: f32 = String::from_utf8(
+                parser
+                    .parse(SMALL_JSON.as_bytes())
+                    .unwrap()
+                    .get(0)
+                    .unwrap()
+                    .unwrap()
+                    .to_vec(),
+            )
+            .unwrap()
+            .parse()
+            .unwrap();
             assert_eq!(parsed, 3.14159);
         });
     }
@@ -348,15 +416,21 @@ mod tests {
     #[bench]
     fn pikkr_stateless_large_fourth_level(b: &mut Bencher) {
         b.iter(|| {
-            let mut parser = pikkr_annika::Pikkr::new(&vec![
-                "$.property.subProperty.thirdLevel.pi".as_bytes(),
-            ], 2).unwrap();
-            let parsed: f32 = String::from_utf8_lossy(parser.parse(LARGE_JSON.as_bytes())
-                .unwrap()
-                .get(0)
-                .unwrap()
-                .unwrap()
-            ).parse().unwrap();
+            let mut parser = pikkr_annika::Pikkr::new(
+                &vec!["$.property.subProperty.thirdLevel.pi".as_bytes()],
+                2,
+            )
+            .unwrap();
+            let parsed: f32 = String::from_utf8_lossy(
+                parser
+                    .parse(LARGE_JSON.as_bytes())
+                    .unwrap()
+                    .get(0)
+                    .unwrap()
+                    .unwrap(),
+            )
+            .parse()
+            .unwrap();
             assert_eq!(parsed, 3.14159);
         });
     }
@@ -393,14 +467,24 @@ mod tests {
     fn tinyjson_small_fourth_level(b: &mut Bencher) {
         b.iter(|| {
             let parsed: tinyjson::JsonValue = SMALL_JSON.parse().unwrap();
-            assert_eq!(*parsed["property"]["subProperty"]["thirdLevel"]["pi"].get::<f64>().unwrap(), 3.14159);
+            assert_eq!(
+                *parsed["property"]["subProperty"]["thirdLevel"]["pi"]
+                    .get::<f64>()
+                    .unwrap(),
+                3.14159
+            );
         });
     }
     #[bench]
     fn tinyjson_large_fourth_level(b: &mut Bencher) {
         b.iter(|| {
             let parsed: tinyjson::JsonValue = LARGE_JSON.parse().unwrap();
-            assert_eq!(*parsed["property"]["subProperty"]["thirdLevel"]["pi"].get::<f64>().unwrap(), 3.14159);
+            assert_eq!(
+                *parsed["property"]["subProperty"]["thirdLevel"]["pi"]
+                    .get::<f64>()
+                    .unwrap(),
+                3.14159
+            );
         });
     }
     #[bench]
