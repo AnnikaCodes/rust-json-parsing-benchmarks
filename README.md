@@ -26,7 +26,7 @@ Each of these library types has different applications; you need to figure out w
 Although I did my best to implement each benchmark for every library, the most relevant benchmarks for the property-parsing libraries are the `top_level` and `fourth_level` benchmarks (which retrieve a single value).
 Conversely, the most relevant benchmark for the object-parsing libraries is the `parse_all` benchmark; the other benchmarks will take about the same time, since these libraries must parse the entire object before retrieving any values.
 ### Object-parsing libraries
-The fastest object-parsing JSON library benchmarked here was **json-rust**, which was about 2.7x faster than the second-fastest, serde_json, at parsing large objects and about 2x faster than serde_json at parsing small objects.
+The fastest object-parsing JSON library benchmarked here was **json-rust**, which was about 2.7x faster than the second-fastest, Serde JSON, at parsing large objects and about 1.3x faster than Serde JSON at parsing small objects.
 If you want the features of Serde, **Serde JSON** is 1.6x faster than simd-json for small objects; while parsing large objects, they are about equally matched, except that simd-json is 1.5x faster when parsing a single top-level property. (I'm not really sure why this is, since simd-json ostensibly parses the entire object at once. Maybe it's cleverly optimized at compile-time for top-level property accesses?)
 Although its syntax is rather clean, **tinyjson** has the worst performance of all the object-parsing libraries benchmarked here.
 
